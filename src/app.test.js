@@ -40,4 +40,8 @@ describe('Add Function', () => {
   test('Allow multiple delimiters', () => {
     expect(add('//[*][%]\n1*2%3')).toBe(6);
   });
+
+  test('Allow multiple delimiters of different lengths', () => {
+    expect(add('//[**][%%]\n1**2%%3')).toBe(6);
+  });
 });
