@@ -2,21 +2,22 @@
 const regex = /^\/\/(.*?)\n/;
 
 const add = (a = '') => {
-  const delimiter = a.match(regex) || ',';
-  if (Array.isArray(delimiter)) {
-    a = a.replace(delimiter[0], '');
-    const matches = [...delimiter[1].matchAll(/\[(.*?)\]/g)]?.map(
+  const delimiterMatch = a.match(regex);
+  let delimiter = ',';
+  if (delimiterMatch) {
+    delimiter = delimiterMatch[1];
+
+    a = a.replace(delimiterMatch[0], '');
+
+    const matches = [...delimiter.matchAll(/\[(.*?)\]/g)].map(
       match => match[1]
     );
-    console.log({ matches });
-    if (matches.length) {
-      for (let i = 0; i < matches.length; i++) {
-        a = a.replaceAll(matches[i], ',');
-      }
-    } else {
-      a = a.replace(new RegExp(delimiter[1], 'g'), ',');
-    }
+
+    matches.length
+      ? matches.forEach(match => (a = a.replaceAll(match, ',')))
+      : (a = a.replace(new RegExp(delimiter, 'g'), ','));
   }
+
   a = a.replace(/\n/g, ',');
   const array = a.split(',');
   const negativeNumbers = array.filter(num => num < 0);
