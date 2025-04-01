@@ -1,9 +1,12 @@
 // function to add
 
 const add = (a = '') => {
-  if (!a) return 0;
-  const array = a.split(' ');
-  return Number(array[0]);
+  const array = a.split(',');
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    sum += Number(array[i]);
+  }
+  return sum;
 };
 
 module.exports = {
