@@ -1,3 +1,5 @@
+const { add } = require('./app');
+
 test('add', () => {
-  expect().toBe();
+  expect(add('')).toBe(0);
 });
