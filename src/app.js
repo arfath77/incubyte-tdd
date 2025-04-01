@@ -8,6 +8,9 @@ const add = (a = '') => {
   const array = a.split(delimiter[1] || ',');
   let sum = 0;
   for (let i = 0; i < array.length; i++) {
+    if (array[i] < 0) {
+      throw new Error(`number is negative: ${array[i]}`);
+    }
     sum += Number(array[i]);
   }
   return sum;
