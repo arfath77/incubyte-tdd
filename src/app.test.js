@@ -36,4 +36,8 @@ describe('Add Function', () => {
   test('Delimiters can be of any length', () => {
     expect(add('//[***]\n1***2***3')).toBe(6);
   });
+
+  test('Allow multiple delimiters', () => {
+    expect(add('//[*][%]\n1*2%3')).toBe(6);
+  });
 });

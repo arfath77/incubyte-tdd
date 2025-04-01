@@ -5,10 +5,20 @@ const add = (a = '') => {
   const delimiter = a.match(regex) || ',';
   if (Array.isArray(delimiter)) {
     a = a.replace(delimiter[0], '');
-    delimiter[1] = delimiter[1].replace(/(\[|\])/g, '');
+    const matches = [...delimiter[1].matchAll(/\[(.*?)\]/g)]?.map(
+      match => match[1]
+    );
+    console.log({ matches });
+    if (matches.length) {
+      for (let i = 0; i < matches.length; i++) {
+        a = a.replaceAll(matches[i], ',');
+      }
+    } else {
+      a = a.replace(new RegExp(delimiter[1], 'g'), ',');
+    }
   }
   a = a.replace(/\n/g, ',');
-  const array = a.split(delimiter[1] || ',');
+  const array = a.split(',');
   const negativeNumbers = array.filter(num => num < 0);
   if (negativeNumbers.length > 0) {
     throw new Error(
