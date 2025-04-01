@@ -5,4 +5,5 @@ test('add', () => {
   expect(add('1')).toBe(1);
   expect(add('1,5')).toBe(6);
   expect(add('1,5,10,240')).toBe(256);
+  expect(add('1\n5,10,240')).toBe(256);
 });
