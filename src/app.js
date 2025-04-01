@@ -3,7 +3,10 @@ const regex = /^\/\/(.*?)\n/;
 
 const add = (a = '') => {
   const delimiter = a.match(regex) || ',';
-  if (Array.isArray(delimiter)) a = a.replace(delimiter[0], '');
+  if (Array.isArray(delimiter)) {
+    a = a.replace(delimiter[0], '');
+    delimiter[1] = delimiter[1].replace(/(\[|\])/g, '');
+  }
   a = a.replace(/\n/g, ',');
   const array = a.split(delimiter[1] || ',');
   const negativeNumbers = array.filter(num => num < 0);

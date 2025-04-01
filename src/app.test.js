@@ -32,4 +32,8 @@ describe('Add Function', () => {
   test('Numbers bigger than 1000 should be ignored', () => {
     expect(add('//;\n1;2;1001')).toBe(3);
   });
+
+  test('Delimiters can be of any length', () => {
+    expect(add('//[***]\n1***2***3')).toBe(6);
+  });
 });
